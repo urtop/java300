@@ -2,10 +2,7 @@ package com.bjsxt.net.tcp.socket;
 
 import com.sun.prism.shader.Solid_ImagePattern_Loader;
 
-import java.io.BufferedWriter;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 
@@ -18,8 +15,13 @@ public class Server {
         serverSocket.setReuseAddress(true);
 
         while (true) {
+            //blocked when accept
             Socket socket = serverSocket.accept();
-            System.out.println("clinet is : "+socket.getRemoteSocketAddress());
+
+            DataInputStream inputStream = new DataInputStream(socket.getInputStream());
+            System.out.println("Client say :"+inputStream.readUTF());
+
+            System.out.println("clinet is : " + socket.getRemoteSocketAddress());
             String msg = "hi9999";
 
             DataOutputStream outputStream = new DataOutputStream(socket.getOutputStream());
