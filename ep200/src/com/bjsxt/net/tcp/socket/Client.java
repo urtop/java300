@@ -9,12 +9,12 @@ import java.net.Socket;
 public class Client {
     public static void main(String[] args) throws IOException {
         Socket socket = new Socket("localhost", 8888);
-        DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
-        dataOutputStream.writeUTF("6666");
+        while (true) {
+            DataOutputStream dataOutputStream = new DataOutputStream(socket.getOutputStream());
+            dataOutputStream.writeUTF("6666");
 
-        DataInputStream inputStream = new DataInputStream(socket.getInputStream());
-        System.out.println(inputStream.readUTF());
-
-
+            DataInputStream inputStream = new DataInputStream(socket.getInputStream());
+            System.out.println(inputStream.readUTF());
+        }
     }
 }
