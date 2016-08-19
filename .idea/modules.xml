@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/ep196-serverlet-server/ep196-serverlet-server.iml" filepath="$PROJECT_DIR$/ep196-serverlet-server/ep196-serverlet-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/ep200/ep200.iml" filepath="$PROJECT_DIR$/ep200/ep200.iml" />
     </modules>
   </component>
