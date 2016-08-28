@@ -47,8 +47,7 @@ public class Server {
 
                 //发送欢迎信息
                 this.send("欢迎登录:" + this.name);
-
-                sendToOthers(this.name+" 进入聊天室");
+                sendToOthers(this.name + " 进入聊天室");
             } catch (IOException e) {
                 e.printStackTrace();
                 CloseUtil.closeAll(inputStream, outputStream);
@@ -92,14 +91,26 @@ public class Server {
          * 发送给其他人
          */
         private void sendToOthers(String msg) {
-            //遍历连接对象
-            for (MyChannel chn : myChannelList) {
-                //消息发送给除了自己以外的，所有人
-                if (chn == this) {
-                    continue;
+            if ((msg.indexOf("@") == 0)) {
+                String name = msg.substring(1, msg.indexOf(":"));
+                String content = msg.substring(msg.indexOf(":")+1);
+                for (MyChannel chn : myChannelList) {
+                    if (chn.name.equals(name)) {
+                        chn.send(name + " 对你私聊: " + content);
+                        break;
+                    }
                 }
-                chn.send(msg);
+            } else {
+                //遍历连接对象
+                for (MyChannel chn : myChannelList) {
+                    //消息发送给除了自己以外的，所有人
+                    if (chn == this) {
+                        continue;
+                    }
+                    chn.send(this.name+" 对所有人说: "+msg);
+                }
             }
+
         }
 
 
